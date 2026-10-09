@@ -1,14 +1,28 @@
 # --agentic-help
 
-A CLI traditionally has a `--help` for a brief instructions and a man page for detailed ones.
+## Problem
 
-In the age of agentic development, the iteration of `command --help` often followed by `command subcommand --help` is mostly a waste of tokens, context and time. 
+A CLI traditionally has a `--help` for brief instructions and a man page for detailed ones.
 
-As an alternative, a middle ground `--agentic-help` (or a synonym `--agent-help`) can serve as a TL;DR for agents covering 80% of their doc exploration needs for unknown commands.
+In the age of agentic development, iterating `command --help`, often followed by `command subcommand --help`, is mostly a waste of tokens, context and time.
 
-The command output should recursively print all commands and subcommands with brief descriptions, followed by an optional short text describing important pecularities like conventions and formats. Important is to keep it relatively small - the man page still is the source of the exhaustive documentation.
+## Proposal
 
-Another advantage is that with this addition AGENTS.md doesn't need to contain detailed instructions, just an introduction and a reference on how to get detailed help. Here's an example for [moth](https://github.com/tailoredshapes/moth) from this repo:
+As an alternative, a middle ground, `--agentic-help` (alias: `--agent-help`), can serve as a TL;DR for agents. It covers 80% of their documentation exploration needs for unknown commands.
+
+The command's output should:
+
+- recursively list every command, subcommand and their options, with a one-line description for each
+- optionally end with a short note on conventions and formats 
+- stay small to protect the agent's context from bloating
+
+The man page remains the source of the exhaustive documentation.
+
+Another advantage is that with this flag, AGENTS.md doesn't need to contain verbose instructions, only an introduction and a pointer to the detailed help.
+
+## Example
+
+Here's an example for moth, an in-repo file-based issue tracker [moth](https://github.com/tailoredshapes/moth), taken from this repo's AGENTS.md:
 
 ```
 # Moth Agent Guide
@@ -18,8 +32,8 @@ This guide helps LLM agents work effectively with moth, a git-based file issue t
 ## Overview
 
 Moth stores issues as markdown files in `.moth/` directories organized by status (ready, doing, done). Each issue has a unique ID, severity, and slug derived from the title.
-NEVER manupulate the moth files directly, ALWAYS use `moth` cli for any changes.
-`moth update` replaces the whole description from stdin — when adding to an
+NEVER manipulate the moth files directly, ALWAYS use `moth` cli for any changes.
+`moth update` replaces the whole description from stdin - when adding to an
 issue (e.g. a decision record), always read the current description first
 (`moth show`) and pass it back through unchanged plus the new content
 appended. Never drop existing text.
@@ -29,10 +43,9 @@ appended. Never drop existing text.
 ## Workflow Commands
 
 See `moth --agent-help`
-
 ```
 
-and here's an example of moth's `--agent-help`
+Moth uses the shorter alias `--agent-help`. Here's an example of its output:
 
 ```
 moth

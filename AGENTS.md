@@ -5,8 +5,8 @@ This guide helps LLM agents work effectively with moth, a git-based file issue t
 ## Overview
 
 Moth stores issues as markdown files in `.moth/` directories organized by status (ready, doing, done). Each issue has a unique ID, severity, and slug derived from the title.
-NEVER manupulate the moth files directly, ALWAYS use `moth` cli for any changes.
-`moth update` replaces the whole description from stdin — when adding to an
+NEVER manipulate the moth files directly, ALWAYS use `moth` cli for any changes.
+`moth update` replaces the whole description from stdin - when adding to an
 issue (e.g. a decision record), always read the current description first
 (`moth show`) and pass it back through unchanged plus the new content
 appended. Never drop existing text.
